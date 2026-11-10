@@ -129,8 +129,6 @@ def spin(balance):
     if winnings >= 0:
         print(f"You won ${winnings}!!!")
         print(f" How many lines you won:", *winnings_lines)
-    else:
-        print("You didn't win anything, better luck next time!")
     
     return winnings - total_bet #return the amount won minus the amount bet
 
@@ -139,6 +137,18 @@ def main(): #result
     balance = deposit()
     while True:
         print(f"Current balance is ${balance}")
+        #check for balance, if the player has enough to play
+
+        if balance <= 0:
+            print("You ran out of money! Better luck next time!")
+            answer = input("Would you like to deposit more money? (Yes/No) ")
+            if answer.lower() == "yes":
+                balance = deposit()
+                continue
+            else:
+                print("Thank you for playing! See you next time!")
+                break
+
         answer = input("Press enter to play (q to quit).")
         if answer == "q":
             break
@@ -146,8 +156,6 @@ def main(): #result
 
     print(f"You have left with ${balance}")
 
-    if balance <= 0:
-        print("Thank you for playing, come back soon! Press q to quit.")
     
     
 
